@@ -17,7 +17,7 @@
         <div class="container py-4 py-xl-5">
             <div class="row mb-5">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h2>Bid for Charity</h2>
+                    <h2>Bids you own !!!!!</h2>
                     <p class="w-lg-50">Decorate your surroundings with the aim of helping one another.</p>
                 </div>
             </div>
@@ -31,21 +31,15 @@
                               <h4 class="card-title">{{x.name}}</h4>
                               <p class="card-text">{{x.description}}</p>
                               {% if x.amount_final %}
-                              <p class="card-text">Current Value{{x.amount_final}}</p>
+                              <p class="card-text">Current Value {{x.amount_final}}</p>
                               <p class="card-text">Bid currently owned by {{x.user_assigned.username}}</p>
+                              <p class="card-text">Email Address : {{x.user_assigned.email}}</p>
                               {%else%}
-                              <p class="card-text">Current Value{{x.amount_initial}}</p>
-                              <p class="card-text"><i>Be the first one to bid</i></p>
+                              <p class="card-text">Value you have set is {{x.amount_initial}}</p>
+                              <p class="card-text"><b>No Bids taken place till now</b></p>
                               {% endif %}
-                              <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                <form method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" id="post_id" name="post_id" value="{{ x.id }}">
-                                    <input type="hidden" id="user_id" name="user_id" value="{{ user.id }}">
-                                    <input id="amount_final" name="amount_final">
-                                    <button type="submit">Submit Bid</button>
-                                </form>
-                              </div>
+                              <a href="/bid/{{ x.id }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Update</a>
+                              <a href="/bid/delete/{{ x.id }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Delete</a>
                           </div>
                       </div>
                   </div>

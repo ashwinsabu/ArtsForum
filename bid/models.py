@@ -14,3 +14,4 @@ class Bid_posts(models.Model):
     Status = models.IntegerField()
     def __str__(self):
         return self.name
+    
