@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import * 
+from .forms import *
 import json
 from django.contrib import messages
 from django.urls import reverse
@@ -67,3 +68,26 @@ def bookPageView(request,id):
         return render(request, 'booking.html')
     else:
         return redirect('login') 
+    
+def CreatePageView(request):
+    if request.user.is_authenticated and request.user.is_staff==True:
+        if request.method == 'POST':
+            form = EventCreation(request.POST)
+            if form.is_valid():
+                seats = form.cleaned_data['seats']
+                heading = form.cleaned_data['heading']
+                location = form.cleaned_data['location']
+                subline = form.cleaned_data['subline']
+                event = Community.objects.create(
+                    seats=seats,
+                    heading=heading,
+                    location=location,
+                    subline=subline,
+                    user_id=request.user
+                )
+                return redirect('index_comm')
+        elif request.method == "GET":
+            form = EventCreation()
+        return render(request, 'create_event.html', {'form': form})
+    else:
+        return redirect('login')

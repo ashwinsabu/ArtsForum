@@ -4,4 +4,5 @@ from . import views
 urlpatterns = [
     path('', views.communityPageView, name='index_comm'),
     path('book/<int:id>/', views.bookPageView, name='booking'),
+    path('create', views.CreatePageView, name='create_event'),
     ]

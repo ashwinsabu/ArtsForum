@@ -15,10 +15,13 @@
 
 <body>
   {% extends 'users/header.html' %}
-    {% block content %}
+  {% block content %}
   <div style="margin: 4%;">
     <div style="margin-bottom: 3%;">
       <h3>Community Gather Events</h3>
+      {% if request.user.is_staff %}
+      <a class="btn btn-success" href="{% url 'create_event' %}">Create Event</a>
+      {% endif %}
     </div>
     <div style="margin-right: 10%;">
       {% if community %}
@@ -27,9 +30,12 @@
       <div class="card" style="box-shadow: 10px 10px 5px bisque;margin-bottom: 5%;border-radius: 15px;">
         <h5 class="card-header">{{x.heading}}</h5>
         <div class="card-body">
-          <h5 class="card-title">{{x.location}}</h5>
+          <h5 class="card-title"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+              <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+            </svg> {{x.location}}</h5>
           <p class="card-text">{{x.subline}}</p>
-          <p class="card-text">For more details contact - ashwin@artsforum.com</p>
+          <p class="card-text">For more details contact - {{x.user_id.email}}</p>
           <p class="font-weight-light">Limited Seats Available -- {{x.seats}}</p>
           <form method="post">
             {% csrf_token %}
@@ -51,9 +57,12 @@
       <div class="card" style="margin-top: 2%;box-shadow: 10px 10px 5px lightblue;margin-right: 10%;">
         <h5 class="card-header">{{x.heading}}</h5>
         <div class="card-body">
-          <h5 class="card-title">{{x.location}}</h5>
+          <h5 class="card-title"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+              <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+            </svg> {{x.location}}</h5>
           <p class="card-text">{{x.subline}}</p>
-          <p class="card-text">For more details contact - ashwin@artsforum.com</p>
+          <p class="card-text">For more details contact - {{x.user_id.email}}</p>
           <p class="font-weight-light">See you in {{x.location}}</p>
           <form method="post">
             {% csrf_token %}
