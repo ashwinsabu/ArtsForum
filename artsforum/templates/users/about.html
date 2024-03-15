@@ -11,6 +11,8 @@
     <title>Hello, world!</title>
   </head>
   <body>
+    {% extends './header.html' %}
+    {% block content %}
     <section>
         <div>
             <div class="container py-4 py-xl-5">
@@ -23,10 +25,10 @@
                 <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-lg-3">
                     <div class="col">
                         <div class="card border-0 shadow-none">
-                            <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" alt="man leaning on brown wall" width="130" height="130" src="https://img.freepik.com/free-photo/handsome-manager-glasses-working-using-clipboard-standing_1258-26559.jpg?w=1060">
+                            <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" alt="man leaning on brown wall" width="130" height="130" src="https://img.freepik.com/free-vector/isolated-young-handsome-man-set-different-poses-white-background-illustration_632498-646.jpg?w=740">
                                 <div>
-                                    <h5 class="fw-bold text-primary mb-0">Ashwin Sabu</h5>
-                                    <p class="text-muted mb-1">CEO</p>
+                                    <h5 class="fw-bold text-primary mb-0"><strong>John A</strong></h5>
+                                    <p class="text-muted mb-1">Volunteer</p>
                                     <ul class="list-inline fs-6 text-muted w-100 mb-0">
                                         <li class="list-inline-item text-center">
                                             <div class="d-flex flex-column align-items-center"></div>
@@ -43,10 +45,10 @@
                     </div>
                     <div class="col">
                         <div class="card border-0 shadow-none">
-                            <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" alt="man wearing white V-neck shirt" width="130" height="130" src="https://img.freepik.com/free-photo/handsome-manager-glasses-working-using-clipboard-standing_1258-26559.jpg?w=1060">
+                            <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" alt="man wearing white V-neck shirt" width="130" height="130" src="https://img.freepik.com/free-vector/illsutrated-mature-woman-standing-alone_53876-37257.jpg?w=740">
                                 <div>
-                                    <h5 class="fw-bold text-primary mb-0"><strong>Ashwin Sabu</strong></h5>
-                                    <p class="text-muted mb-1">CEO</p>
+                                    <h5 class="fw-bold text-primary mb-0"><strong>Sarah A</strong></h5>
+                                    <p class="text-muted mb-1">Volunteer</p>
                                     <ul class="list-inline fs-6 text-muted w-100 mb-0">
                                         <li class="list-inline-item text-center">
                                             <div class="d-flex flex-column align-items-center"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">
@@ -65,10 +67,10 @@
                     </div>
                     <div class="col">
                         <div class="card border-0 shadow-none">
-                            <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" alt="man standing near white wall" width="130" height="130" src="https://img.freepik.com/free-photo/handsome-manager-glasses-working-using-clipboard-standing_1258-26559.jpg?w=1060">
+                            <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" alt="man standing near white wall" width="130" height="130" src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-857.jpg?w=740">
                                 <div>
-                                    <h5 class="fw-bold text-primary mb-0"><strong>Ashwin Sabu</strong></h5>
-                                    <p class="text-muted mb-1">CEO</p>
+                                    <h5 class="fw-bold text-primary mb-0"><strong>Davis S</strong></h5>
+                                    <p class="text-muted mb-1">Volunteer</p>
                                     <ul class="list-inline fs-6 text-muted w-100 mb-0">
                                         <li class="list-inline-item text-center">
                                             <div class="d-flex flex-column align-items-center"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">
@@ -92,12 +94,12 @@
     <section>
         <section class="py-4 py-xl-5">
             <div class="container h-100">
-                <div class="text-white bg-primary border rounded border-0 p-4 py-5">
+                <div class="text-white border rounded border-0 p-4 py-5" style="background-color: bisque;box-shadow: 10px 10px 5px lightblue;">
                     <div class="row h-100">
                         <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
                             <div>
-                                <h1 class="text-uppercase fw-bold text-white mb-3">We will reach out to you</h1>
-                                <p class="mb-4">Etiam a rutrum, mauris lectus aptent convallis. Fusce vulputate aliquam, sagittis odio metus. Nulla porttitor vivamus viverra laoreet, aliquam netus.</p><button class="btn btn-light fs-5 py-2 px-4" type="button">Contact Us</button>
+                                <h1 class="text-uppercase fw-bold mb-3" style="color: black;">We will reach out to you</h1>
+                                <p class="mb-4" style="color: black;">We are volunteers who manage this website and keep a close eye on the activities to make sure that there is no fraud activities going on in between. If you find any, feel free to reach out to us !!</p><button class="btn btn-light fs-5 py-2 px-4" type="button">Contact Us</button>
                             </div>
                         </div>
                     </div>
@@ -105,6 +107,7 @@
             </div>
         </section>
     </section>
+    {% endblock content %}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

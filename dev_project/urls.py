@@ -22,6 +22,7 @@ urlpatterns = [
     path('', include('artsforum.urls')),
     path('auth/', include('users.urls')),
     path('bid/', include('bid.urls')),
+    path('community/', include('community.urls')),
     path('signout/', auth_views.LogoutView.as_view(template_name='users/signout.html'), name='sign_out'),
     # path('quiz/', include('quiz.urls')),
 ]

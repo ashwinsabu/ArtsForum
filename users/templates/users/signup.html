@@ -43,6 +43,11 @@
         <div class="col">
           {{ form.username }}
         </div>
+        {% if form.errors %}
+        <div role="alert" style="color: red;margin-left: 16%;">
+          {{form.errors.username}}
+        </div>
+        {% endif %}
       </div>
       <div class="row" style="margin-bottom: 1.5%;">
         <div class="col">
@@ -51,6 +56,13 @@
         <div class="col">
           {{ form.first_name }}
         </div>
+
+        {% if form.errors %}
+        <div role="alert" style="color: red;margin-left: 16%;">
+          {{form.errors.first_name}}
+        </div>
+        {% endif %}
+
       </div>
       <div class="row" style="margin-bottom: 1.5%;">
         <div class="col">
@@ -59,6 +71,11 @@
         <div class="col">
           {{ form.last_name }}
         </div>
+        {% if form.errors %}
+        <div role="alert" style="color: red;margin-left: 16%;">
+          {{form.errors.last_name}}
+        </div>
+        {% endif %}
       </div>
       <div class="row" style="margin-bottom: 1.5%;">
         <div class="col">
@@ -75,6 +92,11 @@
         <div class="col">
           {{ form.password1 }}
         </div>
+        {% if form.errors %}
+        <div role="alert" style="color: red;margin-left: 16%;">
+          {{form.errors.password1}}
+        </div>
+        {% endif %}
       </div>
       <div class="row" style="margin-bottom: 1.5%;">
         <div class="col">
@@ -83,6 +105,11 @@
         <div class="col">
           {{ form.password2 }}
         </div>
+        {% if form.errors %}
+        <div role="alert" style="color: red;margin-left: 16%;">
+          {{form.errors.password2}}
+        </div>
+        {% endif %}
       </div>
 
         <!-- <div class="mb-3"><label for="username" class="font-italic">User Name</label><br>{{ form.username }}</div>
@@ -92,7 +119,11 @@
         <div class="mb-3"><label for="username" class="font-italic">Password</label><br>{{ form. }}</div>
         <div class="mb-3"><label for="username" class="font-italic">Password</label><br>{{ form.password1 }}</div>
         <div class="mb-3"><label for="username" class="font-italic">Confirm Password</label><br>{{ form.password2 }}</div> -->
-        <span class="text-error">{{ form.errors }}</span>
+        {% if form.errors %}
+        <div role="alert" style="color: red;white-space: pre-line;">
+          {{form.errors.first_name}}
+        </div>
+        {% endif %}
 
         <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">SignUp</button></div>
         <div>
@@ -110,6 +141,5 @@
             </div>
         </div>
     </div>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

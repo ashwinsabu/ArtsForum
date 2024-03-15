@@ -42,7 +42,9 @@
                                 <div class="mb-3">{{ form.username }}</div>
                                 <div class="mb-3">{{ form.password }}</div>
                                 <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Login</button></div>
-                                <p class="text-muted">Forgot your password?</p>
+                                <div>
+                                    Don't have an account <a href="{% url 'sign_up' %}">Sign Up
+                                    </div>
                             </form>
                         </div>
                                 <div class="col-md-12 col-xl-4">
@@ -55,6 +57,5 @@
             </div>
         </div>
     </div>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

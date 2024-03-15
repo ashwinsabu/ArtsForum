@@ -7,11 +7,7 @@ def sign_up(request):
     if request.method == "POST":
         form = UserSignUpForm(request.POST)
         if form.is_valid():
-            user=form.save(commit=False)
-            user.is_staff=True
-            user.save()
-            # un = form.cleaned_data.get('username')
-            # messages.success(request, 'Account created for {}.'.format(un))
+            user=form.save()
             return redirect('login')
     elif request.method == "GET":
         form = UserSignUpForm()

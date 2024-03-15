@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <title>Hello, world!</title>
+</head>
+
+<body>
+  {% extends 'users/header.html' %}
+    {% block content %}
+  <div style="margin: 4%;">
+    <div style="margin-bottom: 3%;">
+      <h3>Community Gather Events</h3>
+    </div>
+    <div style="margin-right: 10%;">
+      {% if community %}
+      <h4><b>Upcoming Events</b></h4>
+      {% for x in community %}
+      <div class="card" style="box-shadow: 10px 10px 5px bisque;margin-bottom: 5%;border-radius: 15px;">
+        <h5 class="card-header">{{x.heading}}</h5>
+        <div class="card-body">
+          <h5 class="card-title">{{x.location}}</h5>
+          <p class="card-text">{{x.subline}}</p>
+          <p class="card-text">For more details contact - ashwin@artsforum.com</p>
+          <p class="font-weight-light">Limited Seats Available -- {{x.seats}}</p>
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{x.id}}">
+            <button type="submit" name="book_me" class="btn btn-primary">Book for me</button>
+            <a type="submit" name="group" href="/community/book/{{x.id}}" class="btn btn-secondary">Book for a group</a>
+          </form>
+        </div>
+
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+    <div style="margin-top: 4%;">
+      {% if communities_registered %}
+      <h4><b>Booked Events</b></h4>
+      <!-- Section for registered events -->
+      {% for x in communities_registered %}
+      <div class="card" style="margin-top: 2%;box-shadow: 10px 10px 5px lightblue;margin-right: 10%;">
+        <h5 class="card-header">{{x.heading}}</h5>
+        <div class="card-body">
+          <h5 class="card-title">{{x.location}}</h5>
+          <p class="card-text">{{x.subline}}</p>
+          <p class="card-text">For more details contact - ashwin@artsforum.com</p>
+          <p class="font-weight-light">See you in {{x.location}}</p>
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{x.id}}">
+            <button type="submit" name="cancel" class="btn btn-danger">Cancel </button>
+          </form>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+  {% endblock content %}
+</body>
+
+</html>

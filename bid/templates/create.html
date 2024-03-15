@@ -44,6 +44,9 @@
                             <div class="col">
                                 {{ form.name }}
                             </div>
+                            <div style="color: red;">
+                            <p><i>{{ form.name.errors }}</i></p>
+                          </div>
                         </div>
                         <div class="row" style="margin-bottom: 1.5%;">
                             <div class="col">
@@ -51,6 +54,9 @@
                             </div>
                             <div class="col">
                             {{ form.description }}
+                            </div>
+                            <div style="color: red;">
+                              <p><i>{{ form.description.errors }}</i></p>
                             </div>
                         </div>
                         <div class="row" style="margin-bottom: 1.5%;">
@@ -67,6 +73,9 @@
                             </div>
                             <div class="col">
                             {{ form.time_limit }}
+                            </div>
+                            <div style="color: red;">
+                              <p><i>{{ form.time_limit.errors }}</i></p>
                             </div>
                         </div>
                         <div class="row" style="margin-bottom: 1.5%;">

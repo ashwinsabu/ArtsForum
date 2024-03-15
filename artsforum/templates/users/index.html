@@ -15,7 +15,7 @@
     {% block content %}
 
       <div>
-          <div class="container">
+          <div class="container" style="margin-top: 3%;">
               <div class="carousel slide" data-bs-ride="carousel" id="carousel-1" style="height: 600px;">
                   <div class="carousel-inner h-100">
                       <div class="carousel-item active h-100" id="carousel-2"><img class="w-100 d-block position-absolute h-100 fit-cover" src="https://img.freepik.com/free-vector/watercolor-chinese-style-illustration_23-2149751196.jpg?t=st=1709893710~exp=1709894310~hmac=a13804fd81c07bce350df05c3e48353f16b60bc6f1a809d26a46ded8174b2e75" alt="Slide Image" style="z-index: -1;">
@@ -24,7 +24,7 @@
                                   <div class="col-md-6 col-xl-4 offset-md-2">
                                       <div style="max-width: 350px;">
                                           <h1 class="text-uppercase fw-bold">Arts Place<br>Get Yor arts in dream</h1>
-                                          <p class="my-3">A place for people who are into arts</p><a class="btn btn-primary btn-lg me-2" role="button" href="#">Button</a><a class="btn btn-outline-primary btn-lg" role="button" href="#">Button</a>
+                                          <p class="my-3">A place for people who are into arts</p>
                                       </div>
                                   </div>
                               </div>
@@ -38,8 +38,8 @@
           <div class="container py-4 py-xl-5">
               <div class="row mb-5">
                   <div class="col-md-8 col-xl-6 text-center mx-auto">
-                      <h2>Heading</h2>
-                      <p class="w-lg-50">Curae hendrerit donec commodo hendrerit egestas tempus, turpis facilisis nostra nunc. Vestibulum dui eget ultrices.</p>
+                      <h2>Arts Forum</h2>
+                      <p class="w-lg-50">A complete place for people intrested in arts to get together, contribute to the society and help each other. Here we get a change to meet stranger and turn them into your friends !!!</p>
                   </div>
               </div>
               <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
@@ -50,12 +50,19 @@
                               <p class="text-primary card-text mb-0">Article</p>
                               <h4 class="card-title">{{x.name}}</h4>
                               <p class="card-text">{{x.description}}</p>
-                              <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
+                              <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://img.freepik.com/free-vector/illustration-user-avatar-icon_53876-5907.jpg?w=740">
                                   <div>
                                       <p class="fw-bold mb-0">{{x.user_created.username}}</p>
                                       <p class="text-muted mb-0">{{x.user_created.first_name}}</p>
                                   </div>
                               </div>
+                              {% if request.user.is_staff %}
+                              <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="post_id" value="{{x.id}}">
+                              <button name="delete_admin" type="submit" class="btn btn-danger">Delete</button>
+                              </form>
+                              {% endif %}
                           </div>
                       </div>
                   </div>

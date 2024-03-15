@@ -10,3 +10,16 @@ class Posts(models.Model):
     user_created =models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
+    
+
+#model for contact us page queries
+class UserRequest(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField()
+    message = models.CharField(max_length=200)
+    vol_assign = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    status = models.IntegerField()
+    comments = models.CharField(max_length=200,null=True)
+
+    def __int__(self):
+        return str(self.name)

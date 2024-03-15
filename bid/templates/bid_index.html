@@ -1,72 +1,101 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    {% extends 'users/header.html' %}
-    {% block content %}
-    <div>
-        <div class="container py-4 py-xl-5">
-            <div class="row mb-5">
-                <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h2>Bid for Charity</h2>
-                    <p class="w-lg-50">Decorate your surroundings with the aim of helping one another.</p>
-                </div>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>Hello, world!</title>
+</head>
+
+<body>
+  {% extends 'users/header.html' %}
+  {% block content %}
+  <div>
+    <div class="container py-4 py-xl-5">
+      <div class="row mb-5">
+        <div class="col-md-8 col-xl-6 text-center mx-auto">
+          <h2>Bid for Charity</h2>
+          <p class="w-lg-50">Decorate your surroundings with the aim of helping one another.</p>
+          <a type="button" class="btn btn-outline-success" href="{% url 'create_bid' %}">Add Bid</a>
+          <a type="button" class="btn btn-outline-warning" href="{% url 'myposts' %}">My Bids</a>
+
+        </div>
+      </div>
+      <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
+        {% if posts %}
+        {% for x in posts %}
+        <div class="col-4" style="margin-bottom: 2%;box-shadow: 8px 8px 2px bisque;border-radius: 25px;">
+          <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;"
+              src="https://img.freepik.com/free-vector/artists-painting-abstract-picture-with-paintbrush-oil-paint-work-tiny-persons-drawing-with-digital-tools-flat-vector-illustration-virtual-master-class-online-workshop-creation-concept_74855-21648.jpg?w=900&t=st=1709895023~exp=1709895623~hmac=9f6714d8d8d19bf0c21e066df040f82c0595f04ed2fc3296fd35ebc41f6737a3">
+            <div class="card-body p-4">
+              <p class="text-primary card-text mb-0">BID</p>
+              <h4 class="card-title">{{x.name}}</h4>
+              <p class="card-text">{{x.description}}</p>
+              {% if x.amount_final %}
+              <p class="card-text">Current Value {{x.amount_final}}</p>
+              <p class="card-text">Bid currently owned by {{x.user_assigned.username}}</p>
+              {%else%}
+              <p class="card-text">Current Value {{x.amount_initial}}</p>
+              <p class="card-text"><i>Be the first one to bid</i></p>
+              {% endif %}
+              <div class="d-flex">
+                <form method="post">
+                  {% csrf_token %}
+                  <input type="hidden" id="post_id" name="post_id" value="{{ x.id }}">
+                  <input type="hidden" id="user_id" name="user_id" value="{{ user.id }}">
+                  {% if x.amount_final %}
+                  <input id="amount_final" type="number" name="amount_final" placeholder="Enter your value"
+                    min="{{x.amount_final}}" required>
+                  {%else%}
+                  <input id="amount_final" type="number" name="amount_final" placeholder="Enter your value"
+                    min="{{x.amount_initial}}" required>
+                  {% endif %}
+                  <button type="submit" name="bid">Submit Bid</button>
+                </form>
+              </div>
+              {% if request.user.is_staff %}
+              <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="post_id" value="{{x.id}}">
+                <button name="delete_admin" type="submit" class="btn btn-danger">Delete</button>
+              </form>
+              {% endif %}
             </div>
-            <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
-            {% if posts %}
-                {% for x in posts %}
-                  <div class="col-4" style="margin-bottom: 2%;">
-                      <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="https://img.freepik.com/free-vector/artists-painting-abstract-picture-with-paintbrush-oil-paint-work-tiny-persons-drawing-with-digital-tools-flat-vector-illustration-virtual-master-class-online-workshop-creation-concept_74855-21648.jpg?w=900&t=st=1709895023~exp=1709895623~hmac=9f6714d8d8d19bf0c21e066df040f82c0595f04ed2fc3296fd35ebc41f6737a3">
-                          <div class="card-body p-4">
-                              <p class="text-primary card-text mb-0">Article</p>
-                              <h4 class="card-title">{{x.name}}</h4>
-                              <p class="card-text">{{x.description}}</p>
-                              {% if x.amount_final %}
-                              <p class="card-text">Current Value{{x.amount_final}}</p>
-                              <p class="card-text">Bid currently owned by {{x.user_assigned.username}}</p>
-                              {%else%}
-                              <p class="card-text">Current Value{{x.amount_initial}}</p>
-                              <p class="card-text"><i>Be the first one to bid</i></p>
-                              {% endif %}
-                              <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                <form method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" id="post_id" name="post_id" value="{{ x.id }}">
-                                    <input type="hidden" id="user_id" name="user_id" value="{{ user.id }}">
-                                    <input id="amount_final" name="amount_final">
-                                    <button type="submit">Submit Bid</button>
-                                </form>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  {% endfor %}
-                  {% else %}
-                  <div style="border: 5px solid;
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div style="border: 5px solid;
                   margin: auto;
                   width: 50%;
                   padding: 10px;">
-                  <img src="https://img.freepik.com/free-vector/public-backlash-abstract-concept-illustration-public-reaction-bias-discrimination-minority-rights-group-protest_335657-1095.jpg?w=740" alt="no data" class="img-thumbnail">
-                </div>
-                  {% endif %}
-
-              </div>
+          <img
+            src="https://img.freepik.com/free-vector/public-backlash-abstract-concept-illustration-public-reaction-bias-discrimination-minority-rights-group-protest_335657-1095.jpg?w=740"
+            alt="no data" class="img-thumbnail">
         </div>
+        {% endif %}
+
+      </div>
     </div>
-    {% endblock content %}
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+  </div>
+  {% endblock content %}
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>
