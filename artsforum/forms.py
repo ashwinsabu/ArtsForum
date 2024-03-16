@@ -2,8 +2,10 @@ from django import forms
 from .models import *
 from django.core import validators
 
+
+#Form to create a post
 class PostCreation(forms.Form):
-    image = forms.CharField()
+    image = forms.ImageField()
 
     min_length = 2
     max_length = 20

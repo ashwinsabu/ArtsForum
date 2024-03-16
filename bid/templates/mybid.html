@@ -27,7 +27,7 @@
                   <div class="col-4" style="margin-bottom: 2%;">
                       <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="https://img.freepik.com/free-vector/artists-painting-abstract-picture-with-paintbrush-oil-paint-work-tiny-persons-drawing-with-digital-tools-flat-vector-illustration-virtual-master-class-online-workshop-creation-concept_74855-21648.jpg?w=900&t=st=1709895023~exp=1709895623~hmac=9f6714d8d8d19bf0c21e066df040f82c0595f04ed2fc3296fd35ebc41f6737a3">
                           <div class="card-body p-4">
-                              <p class="text-primary card-text mb-0">Article</p>
+                              <p class="text-primary card-text mb-0">Bid</p>
                               <h4 class="card-title">{{x.name}}</h4>
                               <p class="card-text">{{x.description}}</p>
                               {% if x.amount_final %}
@@ -54,6 +54,43 @@
                   {% endif %}
 
               </div>
+
+
+              <!-- Display area for posts -->
+              <div class="container py-4 py-xl-5">
+                <div class="row mb-5">
+                    <div class="col-md-8 col-xl-6 text-center mx-auto">
+                        <h2>My Posts!!!!!</h2>
+                        <p class="w-lg-50">Show your art work to the world !!!!!</p>
+                    </div>
+                </div>
+                <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
+                {% if myposts %}
+                    {% for y in myposts %}
+                      <div class="col-4" style="margin-bottom: 2%;">
+                          <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="https://img.freepik.com/free-vector/artists-painting-abstract-picture-with-paintbrush-oil-paint-work-tiny-persons-drawing-with-digital-tools-flat-vector-illustration-virtual-master-class-online-workshop-creation-concept_74855-21648.jpg?w=900&t=st=1709895023~exp=1709895623~hmac=9f6714d8d8d19bf0c21e066df040f82c0595f04ed2fc3296fd35ebc41f6737a3">
+                              <div class="card-body p-4">
+                                  <p class="text-primary card-text mb-0">Article</p>
+                                  <h4 class="card-title">{{y.name}}</h4>
+                                  <p class="card-text">{{y.description}}</p>
+                                  <a href="/update/{{ y.id }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Update</a>
+                                  <a href="/bid/post/delete/{{ y.id }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Delete</a>
+                              </div>
+                          </div>
+                      </div>
+                      {% endfor %}
+                      {% else %}
+                      <div style="border: 5px solid;
+                      margin: auto;
+                      width: 50%;
+                      padding: 10px;">
+                      <img src="https://img.freepik.com/free-vector/public-backlash-abstract-concept-illustration-public-reaction-bias-discrimination-minority-rights-group-protest_335657-1095.jpg?w=740" alt="no data" class="img-thumbnail">
+                    </div>
+                      {% endif %}
+    
+                  </div>
+
+
         </div>
     </div>
     {% endblock content %}

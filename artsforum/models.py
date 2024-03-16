@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+#model for Posts
 class Posts(models.Model):
     image = models.CharField(max_length=30)
     name = models.CharField(max_length=30)

@@ -33,8 +33,15 @@
           <li class="nav-item active">
             <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
           </li>
+          {% if request.user.is_staff %}
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'query' %}">Customer Queries</a>
+          </li>
+          {% endif %}
           <div style="position: absolute; right: 10px; top: 5px;">
             <a type="button" class="btn btn-info" href="{% url 'post' %}">Post</a>
+            <a type="button" class="btn btn-info" href="{% url 'myposts' %}">My Content</a>
+            
           </div>
         </ul>
       </div>
