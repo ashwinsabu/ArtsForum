@@ -8,6 +8,5 @@ urlpatterns = [
     path('<int:post_id>', views.UpdatePageView, name='update_bid'),
     path('myposts/', views.MyPageView, name='myposts'),
     path('delete/<int:post_id>', views.DeleteBidPost, name='deletepost'),
-    path('post/delete/<int:post_id>', views.DeleteMyPost, name='deletemypost'),
-    
+    path('post/delete/<int:post_id>', views.DeleteMyPost, name='deletemypost'),    
 ]

@@ -23,11 +23,6 @@ class UserSignUpForm(UserCreationForm):
     validators.MaxLengthValidator(max_length)
     ])
 
-    def clean_password1(self):
-
-        return super().clean_password2()
-
-
     class Meta:
         model = User
         fields = ['username', 'first_name','last_name','email', 'password1', 'password2']

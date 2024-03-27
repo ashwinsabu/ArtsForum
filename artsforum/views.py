@@ -3,6 +3,7 @@ from .models import *
 from django.contrib import messages
 from .forms import *
 from django.http import Http404
+from django.contrib.auth import logout
 
 
 # Create your views here.
@@ -128,3 +129,6 @@ def UpdatePageView(request, id):
     else:
         return redirect('login')
 
+def Logout(request):
+    logout(request)
+    return redirect('login')

@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from .models import *
 from artsforum.models import *
+from community.models import *
 from .forms import *
 from django.contrib.auth.models import User
 from django.http import Http404
@@ -78,9 +79,14 @@ def MyPageView(request):
         currentuser = request.user
         posts = Bid_posts.objects.filter(user_created=currentuser)
         myposts = Posts.objects.filter(user_created=currentuser)
+        community={}
+        if(request.user.is_staff==True):
+            community=Community.objects.filter(user_id=currentuser)
+            print(community)
         context = {
             'posts': posts,
-            'myposts':myposts
+            'myposts':myposts,
+            'community':community
         }
         return render(request, 'mybid.html',context)
     else:

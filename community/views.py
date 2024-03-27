@@ -16,7 +16,9 @@ def communityPageView(request):
                     community_sec.seats-=1
                     add=Participants.objects.create(
                         user_id=request.user,
-                        community_id=community_sec
+                        community_id=community_sec,
+                        name=request.user.username,
+                        email=request.user.email
                     )
                     community_sec.save()
                 return redirect('index_comm')
@@ -47,23 +49,24 @@ def bookPageView(request,id):
     if request.user.is_authenticated:
         if request.method == 'POST':
             participants = request.POST.get('participants')
-            participants = json.loads(participants)
-            print(len(participants))
-            community=Community.objects.get(id=id)
-            if(community.seats>=len(participants)):
-                for x in participants:
-                    participant = Participants.objects.create(
-                        name=x['name'],
-                        email=x['email'],
-                        age=x['age'],
-                        number=x['number'],
-                        user_id=request.user,
-                        community_id= community
-                    )
-            else:
-                messages.warning(request, f'Only {community.seats} seats are remaining in this community.')
+            if participants:
+                participants = json.loads(participants)
+                print(len(participants))
+                community=Community.objects.get(id=id)
+                if(community.seats>=len(participants)):
+                    for x in participants:
+                        participant = Participants.objects.create(
+                            name=x['name'],
+                            email=x['email'],
+                            age=x['age'],
+                            number=x['number'],
+                            user_id=request.user,
+                            community_id= community
+                        )
+                else:
+                    messages.warning(request, f'Only {community.seats} seats are remaining in this community.')
 
-            return redirect(reverse('booking', args=[id]))
+                return redirect(reverse('booking', args=[id]))
 
         return render(request, 'booking.html')
     else:
@@ -91,3 +94,23 @@ def CreatePageView(request):
         return render(request, 'create_event.html', {'form': form})
     else:
         return redirect('login')
+    
+def ViewPart(request,id):
+    data=Participants.objects.filter(community_id=id)
+    context={
+        "data":data
+    }
+    return render(request, 'partdata.html',context)
+
+def EventDelete(request,id):
+    data=Community.objects.filter(id=id)
+    data.delete()
+    return redirect('mybid.html')
+
+def EventDelete(request, id):
+    if request.user.is_authenticated:
+        data = Community.objects.get(id=id)
+        data.delete()
+        return redirect('myposts')
+    else:
+        return redirect('login') 

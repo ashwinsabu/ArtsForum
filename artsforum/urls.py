@@ -9,4 +9,5 @@ urlpatterns = [
     path('post/', views.PostPageView, name='post'),
     path('query/', views.CustomerQueries, name='query'),
     path('update/<int:id>', views.UpdatePageView, name='query'),
+    path('logout', views.Logout, name='logout'),
 ]

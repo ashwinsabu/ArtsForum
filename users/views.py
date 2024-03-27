@@ -6,9 +6,11 @@ from .forms import UserSignUpForm,LoginForm
 def sign_up(request):
     if request.method == "POST":
         form = UserSignUpForm(request.POST)
+        print(form)
         if form.is_valid():
             user=form.save()
-            return redirect('login')
+            if(user):
+                return redirect('login')
     elif request.method == "GET":
         form = UserSignUpForm()
     return render(request, 'users/signup.html', {'form': form})
@@ -21,6 +23,7 @@ def signin(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
+            print(user)
             if user is not None and user.is_staff:
                 login(request, user)
                 return redirect('index')
@@ -31,4 +34,4 @@ def signin(request):
                 msg= 'invalid credentials'
         else:
             msg = 'error validating form'
-    return render(request, 'users/signin.html', {'form': form, 'msg': msg})
+    return render(request, 'users/signin.html', {'form': form, 'msg': msg})    
