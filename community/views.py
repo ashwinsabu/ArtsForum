@@ -14,7 +14,7 @@ def community_page_view(request):
             if 'book_me' in request.POST:
                 community_id = request.POST.get('id')
                 community_sec = Community.objects.get(id=community_id)
-                if (community_sec.seats > 0):
+                if community_sec.seats > 0:
                     community_sec.seats-=1
                     add=Participants.objects.create(
                         user_id=request.user,
@@ -33,7 +33,9 @@ def community_page_view(request):
                 remove.delete()
                 return redirect('index_comm')
         # To get the data for users already registered for event
-        participants=Participants.objects.filter(user_id=request.user).values_list('community_id', flat=True).distinct()
+        participants=Participants.objects.filter(
+            user_id=request.user).values_list(
+                'community_id', flat=True).distinct()
         communities_registered = Community.objects.filter(id__in=participants)
 
         # To get the data for not registered for event
@@ -56,7 +58,7 @@ def book_page_view(request,id):
                 participants = json.loads(participants)
                 print(len(participants))
                 community=Community.objects.get(id=id)
-                if(community.seats>=len(participants)):
+                if community.seats>=len(participants) :
                     for x in participants:
                         participant = Participants.objects.create(
                             name=x['name'],
@@ -67,7 +69,8 @@ def book_page_view(request,id):
                             community_id= community
                         )
                 else:
-                    messages.warning(request, f'Only {community.seats} seats are remaining in this community.')
+                    messages.warning(
+                        request, f'Only {community.seats} seats are remaining.')
 
                 return redirect(reverse('booking', args=[id]))
 
@@ -77,7 +80,7 @@ def book_page_view(request,id):
 
 def create_page_view(request):
     """Function for creataing the events for volunteers/supervisors"""
-    if request.user.is_authenticated and request.user.is_staff==True:
+    if request.user.is_authenticated and request.user.is_staff:
         if request.method == 'POST':
             form = EventCreation(request.POST)
             if form.is_valid():

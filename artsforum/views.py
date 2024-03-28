@@ -93,12 +93,15 @@ def customer_queries(request):
             id= request.POST.get('id')
             response= UserRequest.objects.get(id=id)
             response.comments=comments
-            response.status=1 #Update the status to 1 which indicate the customer query has been responded
-            response.vol_assign=request.user #Update the user id of the supervisor updated the commects
+            #Update the status to 1 which indicate the customer query has been responded
+            response.status=1
+            #Update the user id of the supervisor updated the commects
+            response.vol_assign=request.user
             response.save()
 
             return redirect('query')
-        queries= UserRequest.objects.filter(status=0) #Filter the request with status 0, that is queries not yet responded
+        #Filter the request with status 0, that is queries not yet responded
+        queries= UserRequest.objects.filter(status=0)
         context = {
             'queries':queries,
         }

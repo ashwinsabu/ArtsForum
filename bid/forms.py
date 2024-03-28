@@ -33,7 +33,10 @@ class BidCreation(forms.Form):
             raise forms.ValidationError("Select a future time")
         # elif value
 
-    time_limit = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}),validators=[checktime])
+    time_limit = forms.DateTimeField(
+        widget=forms.DateTimeInput(
+            attrs={'type': 'datetime-local'}),
+            validators=[checktime])
 
     class Meta:
         """Class for forms of Bids"""

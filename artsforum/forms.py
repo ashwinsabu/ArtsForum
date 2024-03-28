@@ -30,4 +30,3 @@ class PostCreation(forms.Form):
         """Class for form"""
         model = Posts
         fields = ['image', 'name','description']
-

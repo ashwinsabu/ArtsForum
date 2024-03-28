@@ -70,7 +70,8 @@ def create_page_view(request):
                     user_assigned=user_assigned,
                     user_created=user_created
                 )
-                return redirect('bid_index') #On successful creation of bid, redirect to the bid index page
+                #On successful creation of bid, redirect to the bid index page
+                return redirect('bid_index')
         elif request.method == "GET":
             form = BidCreation()
         return render(request, 'create.html', {'form': form})
@@ -84,7 +85,7 @@ def my_page_view(request):
         posts = bid_posts.objects.filter(user_created=currentuser)
         myposts = Posts.objects.filter(user_created=currentuser)
         community={}
-        if(request.user.is_staff==True):
+        if request.user.is_staff:
             community=Community.objects.filter(user_id=currentuser)
             print(community)
         context = {
@@ -147,6 +148,3 @@ def delete_my_post(request, post_id):
         return redirect('myposts')
     else:
         return redirect('login')
-
-
-

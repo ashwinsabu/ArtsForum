@@ -41,4 +41,3 @@ class EventCreation(forms.Form):
         """Class for form"""
         model = Community
         fields = ['seats', 'heading','location', 'subline']
-

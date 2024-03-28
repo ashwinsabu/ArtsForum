@@ -8,10 +8,9 @@ def sign_up(request):
     """Function to create account for users"""
     if request.method == "POST":
         form = UserSignUpForm(request.POST)
-        print(form)
         if form.is_valid():
             user=form.save()
-            if(user):
+            if user:
                 return redirect('login')
     elif request.method == "GET":
         form = UserSignUpForm()
@@ -26,11 +25,10 @@ def signin(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            print(user)
             if user is not None and user.is_staff:
                 login(request, user)
                 return redirect('index')
-            elif user is not None and user.is_staff==False:
+            elif user is not None and user.is_staff is False:
                 login(request, user)
                 return redirect('index')
             else:
