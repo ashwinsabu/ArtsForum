@@ -8,22 +8,20 @@ from .models import *
 class BidCreation(forms.Form):
     """Class for form to create a bid"""
     image = forms.ImageField()
-
-    min_length = 2
-    max_length = 20
-
-    message_lt_min = f"Should have at least {min_length} characters."
-    message_ht_max = f"Should have at most{max_length} characters."
+    len_max = 20
+    len_min = 2
+    message_min = f"Should have at least {len_min} characters."
+    message_max = f"Should have at most{len_max} characters."
     name = forms.CharField(validators=[
-    validators.MinLengthValidator(min_length, message_lt_min),
-    validators.MaxLengthValidator(max_length, message_ht_max)
+    validators.MinLengthValidator(len_min, message_min),
+    validators.MaxLengthValidator(len_max, message_max)
     ])
 
-    max_length_des=200
-    message_ht_max_des = f"Should have at most{max_length_des} characters."
+    len_max_des=200
+    message_max_des = f"Must have at most{len_max_des} characters."
     description = forms.CharField(validators=[
-    validators.MinLengthValidator(min_length, message_lt_min),
-    validators.MaxLengthValidator(max_length_des, message_ht_max_des)
+    validators.MinLengthValidator(len_min, message_min),
+    validators.MaxLengthValidator(len_max_des, message_max_des)
     ])
 
     amount_initial= forms.IntegerField()
