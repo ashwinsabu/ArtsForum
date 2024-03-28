@@ -22,16 +22,17 @@ def community_page_view(request):
                         name=request.user.username,
                         email=request.user.email
                     )
-                    community_sec.save()
+                    if add:
+                        community_sec.save()
                 return redirect('index_comm')
-            elif 'cancel' in request.POST:
-                community_id = request.POST.get('id')
-                community_sec = Community.objects.get(id=community_id)
-                community_sec.seats+=1
-                community_sec.save()
-                remove = Participants.objects.filter(community_id=community_id,user_id=request.user)
-                remove.delete()
-                return redirect('index_comm')
+            #Following statements executes when cancel ooperation is passed
+            community_id = request.POST.get('id')
+            community_sec = Community.objects.get(id=community_id)
+            community_sec.seats+=1
+            community_sec.save()
+            remove = Participants.objects.filter(community_id=community_id,user_id=request.user)
+            remove.delete()
+            return redirect('index_comm')
         # To get the data for users already registered for event
         participants=Participants.objects.filter(
             user_id=request.user).values_list(
@@ -48,7 +49,7 @@ def community_page_view(request):
         return render(request, 'index_comm.html',context)
     return redirect('login')
 
-def book_page_view(request,id):
+def book_page_view(request,id_u):
     """Function for booking the events for users"""
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -56,7 +57,7 @@ def book_page_view(request,id):
             if participants:
                 participants = json.loads(participants)
                 print(len(participants))
-                community=Community.objects.get(id=id)
+                community=Community.objects.get(id=id_u)
                 if community.seats>=len(participants) :
                     for x in participants:
                         participant = Participants.objects.create(
@@ -67,11 +68,13 @@ def book_page_view(request,id):
                             user_id=request.user,
                             community_id= community
                         )
+                        if participant:
+                            print("success")
                 else:
                     messages.warning(
                         request, f'Only {community.seats} seats are remaining.')
 
-                return redirect(reverse('booking', args=[id]))
+                return redirect(reverse('booking', args=[id_u]))
 
         return render(request, 'booking.html')
     return redirect('login')
@@ -93,15 +96,16 @@ def create_page_view(request):
                     subline=subline,
                     user_id=request.user
                 )
-                return redirect('index_comm')
+                if event:
+                    return redirect('index_comm')
         elif request.method == "GET":
             form = EventCreation()
         return render(request, 'create_event.html', {'form': form})
     return redirect('login')
 
-def view_part(request,id):
+def view_part(request,id_u):
     """Function for viewing the participants of the events for volunteers/supervisors"""
-    data=Participants.objects.filter(community_id=id)
+    data=Participants.objects.filter(community_id=id_u)
     context={
         "data":data
     }
@@ -113,10 +117,10 @@ def view_part(request,id):
 #     data.delete()
 #     return redirect('mybid.html')
 
-def event_delete(request, id):
+def event_delete(request, id_u):
     """Function for deleting the events for volunteers/supervisors"""
     if request.user.is_authenticated:
-        data = Community.objects.get(id=id)
+        data = Community.objects.get(id=id_u)
         data.delete()
         return redirect('myposts')
     return redirect('login')

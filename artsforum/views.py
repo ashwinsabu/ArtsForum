@@ -41,8 +41,9 @@ def contact_page_view(request):
             message=message,
             status=0
         )
+        if create:
         # Displays the success message in contact us page (redirect)
-        messages.success(request, 'We will contact you back in no time !!!!!!')
+            messages.success(request, 'We will contact you back in no time !!!!!!')
         return redirect('contact')
     return render(request, 'users/contact.html')
 
@@ -66,7 +67,8 @@ def post_page_view(request):
                     description=description,
                     user_created=request.user
                 )
-                return redirect('index')
+                if bid_post:
+                    return redirect('index')
         # Display the form field in HTML page
         elif request.method == "GET":
             form = PostCreation()
@@ -87,8 +89,8 @@ def customer_queries(request):
         if "change" in request.POST:
             #Update the comments in the table
             comments = request.POST.get('comments')
-            id= request.POST.get('id')
-            response= UserRequest.objects.get(id=id)
+            id_u= request.POST.get('id')
+            response= UserRequest.objects.get(id=id_u)
             response.comments=comments
             #Update the status to 1 which indicate the customer query has been responded
             response.status=1
@@ -106,12 +108,12 @@ def customer_queries(request):
     return redirect('login')
 
 #View for updating the posts
-def update_page_view(request, id):
+def update_page_view(request, id_u):
     """Function for updaating the posts"""
     #Checks if user logged in
     if request.user.is_authenticated:
         try:
-            post = Posts.objects.get(id=id) # Retrive the posts with id passed through the url
+            post = Posts.objects.get(id=id_u) # Retrive the posts with id passed through the url
         except Posts.DoesNotExist:
             raise Http404("Post does not exist") # Raise an exception
 

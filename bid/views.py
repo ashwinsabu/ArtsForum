@@ -1,6 +1,6 @@
 """Bids module for displaying arts"""
 from datetime import datetime
-from django.shortcuts import render,redirect, get_object_or_404
+from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.http import Http404
 from artsforum.models import Posts
@@ -70,7 +70,8 @@ def create_page_view(request):
                     user_created=user_created
                 )
                 #On successful creation of bid, redirect to the bid index page
-                return redirect('bid_index')
+                if bid_post:
+                    return redirect('bid_index')
         elif request.method == "GET":
             form = BidCreation()
         return render(request, 'create.html', {'form': form})
@@ -97,10 +98,7 @@ def my_page_view(request):
 def update_page_view(request, post_id):
     """Function for Updating the bids"""
     if request.user.is_authenticated:
-        try:
-            post = BidPosts.objects.get(id=post_id)
-        except BidPosts.DoesNotExist:
-            raise Http404("Post does not exist")
+        post = BidPosts.objects.get(id=post_id)
 
         if request.method == 'POST':
             form = BidCreation(request.POST)
