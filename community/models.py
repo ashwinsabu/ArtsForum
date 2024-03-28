@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Community(models.Model):
+    """Class for community events"""
     heading=models.CharField(max_length=30)
     location=models.CharField(max_length=30)
     subline=models.CharField(max_length=200)
@@ -14,6 +15,7 @@ class Community(models.Model):
 
 
 class Participants(models.Model):
+    """Class for participants of the events"""
     name = models.CharField(max_length=30,null=True)
     email = models.EmailField(null=True)
     age = models.IntegerField(null=True)

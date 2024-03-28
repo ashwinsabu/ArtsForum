@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class bid_posts(models.Model):
+    """Class for bids"""
     image = models.ImageField(upload_to='uploads/bid/')
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=200)

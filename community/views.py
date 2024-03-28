@@ -1,13 +1,13 @@
 """Community module for displaying arts"""
-from django.shortcuts import render, redirect
-from .models import *
-from .forms import *
 import json
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse
+from .models import *
+from .forms import *
 # Create your views here.
 
-def communityPageView(request):
+def community_page_view(request):
     """Function for displaying the events for users"""
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -47,7 +47,7 @@ def communityPageView(request):
     else:
         return redirect('login')
 
-def bookPageView(request,id):
+def book_page_view(request,id):
     """Function for booking the events for users"""
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -75,7 +75,7 @@ def bookPageView(request,id):
     else:
         return redirect('login')
 
-def CreatePageView(request):
+def create_page_view(request):
     """Function for creataing the events for volunteers/supervisors"""
     if request.user.is_authenticated and request.user.is_staff==True:
         if request.method == 'POST':
@@ -99,7 +99,7 @@ def CreatePageView(request):
     else:
         return redirect('login')
 
-def ViewPart(request,id):
+def view_part(request,id):
     """Function for viewing the participants of the events for volunteers/supervisors"""
     data=Participants.objects.filter(community_id=id)
     context={
@@ -107,13 +107,13 @@ def ViewPart(request,id):
     }
     return render(request, 'partdata.html',context)
 
-# def EventDelete(request,id):
+# def event_delete(request,id):
 #     """Function for deleting the events for volunteers/supervisors"""
 #     data=Community.objects.filter(id=id)
 #     data.delete()
 #     return redirect('mybid.html')
 
-def EventDelete(request, id):
+def event_delete(request, id):
     """Function for deleting the events for volunteers/supervisors"""
     if request.user.is_authenticated:
         data = Community.objects.get(id=id)

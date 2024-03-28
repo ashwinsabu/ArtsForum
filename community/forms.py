@@ -1,10 +1,10 @@
 """Community module for displaying arts"""
 from django import forms
-from .models import *
 from django.core import validators
+from .models import *
 
 class EventCreation(forms.Form):
-    """Function form for creating events"""
+    """Class form for creating events"""
     seats = forms.IntegerField()
 
     min_length = 2
@@ -31,12 +31,14 @@ class EventCreation(forms.Form):
     ])
 
     def clean_seats(self):
+        """Function for checking if seats are available"""
         seats = self.cleaned_data.get('seats')
         if seats <=0:
             raise forms.ValidationError("Seat value cannot be less than 0")
         return seats
 
     class Meta:
+        """Class for form"""
         model = Community
         fields = ['seats', 'heading','location', 'subline']
 

@@ -1,7 +1,7 @@
 """Artsforum module for displaying arts -- forms to manage user input"""
 from django import forms
-from .models import *
 from django.core import validators
+from .models import *
 
 
 #Form to create a post
@@ -27,6 +27,7 @@ class PostCreation(forms.Form):
     ])
 
     class Meta:
+        """Class for form"""
         model = Posts
         fields = ['image', 'name','description']
 

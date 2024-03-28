@@ -1,11 +1,12 @@
 """Bids module for displaying arts"""
 from django import forms
-from .models import *
 from django.core import validators
 from django.utils import timezone
+from .models import *
+
 
 class BidCreation(forms.Form):
-    """Function for form to create a bid"""
+    """Class for form to create a bid"""
     image = forms.ImageField()
 
     min_length = 2
@@ -27,6 +28,7 @@ class BidCreation(forms.Form):
 
     amount_initial= forms.IntegerField()
     def checktime(value):
+        """Function for checking if the time is past"""
         if value<timezone.now():
             raise forms.ValidationError("Select a future time")
         # elif value
@@ -34,6 +36,7 @@ class BidCreation(forms.Form):
     time_limit = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}),validators=[checktime])
 
     class Meta:
+        """Class for forms of Bids"""
         model = bid_posts
         fields = ['image', 'name','description','amount_initial', 'time_limit']
 

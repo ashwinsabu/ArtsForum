@@ -1,17 +1,17 @@
 """Bids module for displaying arts"""
 from django.shortcuts import render,redirect, get_object_or_404
+from django.contrib.auth.models import User
+from django.http import Http404
+from datetime import datetime
 from .models import *
 from artsforum.models import *
 from community.models import *
 from .forms import *
-from django.contrib.auth.models import User
-from django.http import Http404
-from datetime import datetime
 
 # Create your views here.
 
 # Display all the bids to the users that have been created
-def BidPageView(request):
+def bid_page_view(request):
     """Function for displaying the bids for users"""
     #Checks if user logged in
     if request.user.is_authenticated:
@@ -42,7 +42,7 @@ def BidPageView(request):
 
 
 #Create a Bid by a user
-def CreatePageView(request):
+def create_page_view(request):
     """Function for creating Bid"""
     #Checks if user logged in
     if request.user.is_authenticated:
@@ -77,7 +77,7 @@ def CreatePageView(request):
     else:
         return redirect('login')
 
-def MyPageView(request):
+def my_page_view(request):
     """Function for displaying the contents created by a respective user"""
     if request.user.is_authenticated:
         currentuser = request.user
@@ -129,7 +129,7 @@ def update_page_view(request, post_id):
 
 
 # To delete a Bid from the section  -- here we pass the id as the argument
-def DeleteBidPost(request, post_id):
+def delete_bid_post(request, post_id):
     """Function for deleting the bids for users"""
     if request.user.is_authenticated:
         data = bid_posts.objects.get(id=post_id)
@@ -139,7 +139,7 @@ def DeleteBidPost(request, post_id):
         return redirect('login')
 
 # To delete a Post from the section  -- here we pass the id as the argument
-def DeleteMyPost(request, post_id):
+def delete_my_post(request, post_id):
     """Function for deleting the post for users"""
     if request.user.is_authenticated:
         data = Posts.objects.get(id=post_id)

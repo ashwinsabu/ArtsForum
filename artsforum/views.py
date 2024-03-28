@@ -1,9 +1,9 @@
 """Artsforum module for displaying arts -- views to display the content of web application"""
 from django.shortcuts import render, redirect
-from .models import *
 from django.contrib import messages
-from .forms import *
 from django.http import Http404
+from .forms import *
+from .models import *
 from django.contrib.auth import logout
 
 #Views to display index page

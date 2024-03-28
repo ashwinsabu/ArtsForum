@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 #model for Posts
 class Posts(models.Model):
+    """Class for posts of arts"""
     image = models.ImageField(upload_to='uploads/posts')
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=200)
@@ -15,6 +16,7 @@ class Posts(models.Model):
 
 #model for contact us page queries
 class UserRequest(models.Model):
+    """Class for contact us page"""
     name = models.CharField(max_length=30)
     email = models.EmailField()
     message = models.CharField(max_length=200)

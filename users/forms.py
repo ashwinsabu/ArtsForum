@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core import validators
 
 class UserSignUpForm(UserCreationForm):
+    """Class for signup"""
     email = forms.EmailField()
 
     min_length = 2
@@ -25,10 +26,12 @@ class UserSignUpForm(UserCreationForm):
     ])
 
     class Meta:
+        """Class for form"""
         model = User
         fields = ['username', 'first_name','last_name','email', 'password1', 'password2']
 
 class LoginForm(forms.Form):
+    """Class for login"""
     username = forms.CharField(
         widget= forms.TextInput(
             attrs={
