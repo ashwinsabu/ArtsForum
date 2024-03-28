@@ -15,5 +15,5 @@ class BidPosts(models.Model):
     time_limit = models.DateTimeField()
     Status = models.IntegerField()
     def __str__(self):
-        return self.name
+        return str(self.name)
     

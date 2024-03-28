@@ -11,7 +11,7 @@ class Community(models.Model):
     seats = models.IntegerField()
     user_id =models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     def __str__(self):
-        return self.heading
+        return str(self.heading)
 
 
 class Participants(models.Model):

@@ -27,7 +27,7 @@ class BidCreation(forms.Form):
     ])
 
     amount_initial= forms.IntegerField()
-    def checktime(value):
+    def checktime(self,value):
         """Function for checking if the time is past"""
         if value<timezone.now():
             raise forms.ValidationError("Select a future time")
