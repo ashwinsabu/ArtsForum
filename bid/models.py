@@ -1,8 +1,9 @@
+"""Bids module for displaying arts"""
 from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
-class Bid_posts(models.Model):
+class bid_posts(models.Model):
     image = models.ImageField(upload_to='uploads/bid/')
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=200)

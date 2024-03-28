@@ -1,3 +1,4 @@
+"""Users module for login and signup"""
 from django.urls import path
 from . import views
 

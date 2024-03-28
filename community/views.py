@@ -1,5 +1,6 @@
+"""Community module for displaying arts"""
 from django.shortcuts import render, redirect
-from .models import * 
+from .models import *
 from .forms import *
 import json
 from django.contrib import messages
@@ -7,6 +8,7 @@ from django.urls import reverse
 # Create your views here.
 
 def communityPageView(request):
+    """Function for displaying the events for users"""
     if request.user.is_authenticated:
         if request.method == 'POST':
             if 'book_me' in request.POST:
@@ -43,9 +45,10 @@ def communityPageView(request):
         }
         return render(request, 'index_comm.html',context)
     else:
-        return redirect('login') 
+        return redirect('login')
 
 def bookPageView(request,id):
+    """Function for booking the events for users"""
     if request.user.is_authenticated:
         if request.method == 'POST':
             participants = request.POST.get('participants')
@@ -70,9 +73,10 @@ def bookPageView(request,id):
 
         return render(request, 'booking.html')
     else:
-        return redirect('login') 
-    
+        return redirect('login')
+
 def CreatePageView(request):
+    """Function for creataing the events for volunteers/supervisors"""
     if request.user.is_authenticated and request.user.is_staff==True:
         if request.method == 'POST':
             form = EventCreation(request.POST)
@@ -94,23 +98,26 @@ def CreatePageView(request):
         return render(request, 'create_event.html', {'form': form})
     else:
         return redirect('login')
-    
+
 def ViewPart(request,id):
+    """Function for viewing the participants of the events for volunteers/supervisors"""
     data=Participants.objects.filter(community_id=id)
     context={
         "data":data
     }
     return render(request, 'partdata.html',context)
 
-def EventDelete(request,id):
-    data=Community.objects.filter(id=id)
-    data.delete()
-    return redirect('mybid.html')
+# def EventDelete(request,id):
+#     """Function for deleting the events for volunteers/supervisors"""
+#     data=Community.objects.filter(id=id)
+#     data.delete()
+#     return redirect('mybid.html')
 
 def EventDelete(request, id):
+    """Function for deleting the events for volunteers/supervisors"""
     if request.user.is_authenticated:
         data = Community.objects.get(id=id)
         data.delete()
         return redirect('myposts')
     else:
-        return redirect('login') 
+        return redirect('login')

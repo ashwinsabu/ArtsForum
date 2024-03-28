@@ -1,12 +1,12 @@
-# pages/urls.py
+"""Bids module for displaying arts"""
 from django.urls import path
 from . import views
 
 urlpatterns = [
     path('', views.BidPageView, name='bid_index'),
     path('create/', views.CreatePageView, name='create_bid'),
-    path('<int:post_id>', views.UpdatePageView, name='update_bid'),
+    path('<int:post_id>', views.update_page_view, name='update_bid'),
     path('myposts/', views.MyPageView, name='myposts'),
     path('delete/<int:post_id>', views.DeleteBidPost, name='deletepost'),
-    path('post/delete/<int:post_id>', views.DeleteMyPost, name='deletemypost'),    
+    path('post/delete/<int:post_id>', views.DeleteMyPost, name='deletemypost'),
 ]

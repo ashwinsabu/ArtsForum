@@ -1,5 +1,6 @@
+"""Artsforum module for displaying arts"""
 from django.contrib import admin
-from .models import *
+from .models import Posts,UserRequest
 
 # Register your models here.
 admin.site.register(Posts)

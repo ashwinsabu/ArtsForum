@@ -1,3 +1,4 @@
+"""Artsforum module for displaying arts -- views to display the content of web application"""
 from django.shortcuts import render, redirect
 from .models import *
 from django.contrib import messages
@@ -5,14 +6,12 @@ from .forms import *
 from django.http import Http404
 from django.contrib.auth import logout
 
-
-# Create your views here.
-
 #Views to display index page
-def IndexPageView(request):
+def index_page_view(request):
+    """Function for displaying index page"""
     #Checks if any submit operation performed
     if request.method == 'POST':
-        #previleage for is_staff true users (supervisors) to delete posts displayed 
+        #previleage for is_staff true users (supervisors) to delete posts displayed
         if 'delete_admin' in request.POST:
             postid=request.POST.get('post_id')
             data=Posts.objects.get(id=postid)
@@ -29,13 +28,14 @@ def IndexPageView(request):
 
 
 # View for contact us page
-def ContactPageView(request):
+def contact_page_view(request):
+    """Function for displaying contact page and takin the input"""
     #Checks if any submit operation performed
     if request.method == "POST":
         name= request.POST.get('name')
         email= request.POST.get('email')
         message= request.POST.get('message')
-        create= UserRequest.objects.create(             
+        create= UserRequest.objects.create(
             name=name,
             email=email,
             message=message,
@@ -47,7 +47,8 @@ def ContactPageView(request):
     return render(request, 'users/contact.html')
 
 # View for creating a post
-def PostPageView(request):
+def post_page_view(request):
+    """Function for displaying the post creation page"""
     #Checks if user logged in
     if request.user.is_authenticated:
     #Checks if any submit operation performed
@@ -74,14 +75,16 @@ def PostPageView(request):
         return render(request, 'users/create_post.html', {'form': form})
     # If not logged in navigate to Login Page
     else:
-        return redirect('login') 
+        return redirect('login')
 
 # View for about us page
-def AboutPageView(request):
+def about_page_view(request):
+    """Function for displaying about us page"""
     return render(request, 'users/about.html')
 
 # View for responding to messages from contact us page
-def CustomerQueries(request):
+def customer_queries(request):
+    """Function for displaying customer queries from contact us page"""
     #checks if user is logged in and is_staff is true (Checks if the user is supervisor)
     if request.user.is_authenticated and request.user.is_staff:
         if "change" in request.POST:
@@ -102,9 +105,10 @@ def CustomerQueries(request):
         return render(request, 'users/query.html',context)
     else:
         return redirect('login')
-    
+
 #View for updating the posts
-def UpdatePageView(request, id):
+def update_page_view(request, id):
+    """Function for updaating the posts"""
     #Checks if user logged in
     if request.user.is_authenticated:
         try:
@@ -132,6 +136,7 @@ def UpdatePageView(request, id):
     else:
         return redirect('login')
 
-def Logout(request):
+def logout_user(request):
+    """Function for logging out"""
     logout(request)
     return redirect('login')

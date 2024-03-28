@@ -136,7 +136,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGOUT_REDIRECT_URL = "/"  
+LOGOUT_REDIRECT_URL = "/"
 
 #s3 storage configurations
 AWS_STORAGE_BUCKET_NAME = 'x23196505-devops-pr'

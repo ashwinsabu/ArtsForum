@@ -1,9 +1,11 @@
+"""Bids module for displaying arts"""
 from django import forms
 from .models import *
 from django.core import validators
 from django.utils import timezone
 
 class BidCreation(forms.Form):
+    """Function for form to create a bid"""
     image = forms.ImageField()
 
     min_length = 2
@@ -32,7 +34,7 @@ class BidCreation(forms.Form):
     time_limit = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}),validators=[checktime])
 
     class Meta:
-        model = Bid_posts
+        model = bid_posts
         fields = ['image', 'name','description','amount_initial', 'time_limit']
 
 
@@ -43,5 +45,5 @@ class BidCreation(forms.Form):
 #     amount_initial= forms.IntegerField()
 #     time_limit = forms.DateTimeField()
 #     class Meta:
-#         model = Bid_posts
+#         model = bid_posts
 #         fields = ['image', 'name','description','amount_initial', 'time_limit']

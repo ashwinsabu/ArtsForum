@@ -1,3 +1,4 @@
+"""Community module for displaying arts"""
 from django.urls import path
 from . import views
 

@@ -1,8 +1,10 @@
+"""Community module for displaying arts"""
 from django import forms
 from .models import *
 from django.core import validators
 
 class EventCreation(forms.Form):
+    """Function form for creating events"""
     seats = forms.IntegerField()
 
     min_length = 2
@@ -15,7 +17,7 @@ class EventCreation(forms.Form):
     validators.MaxLengthValidator(max_length, message_ht_max)
     ])
 
-    
+
     location=forms.CharField(validators=[
     validators.MinLengthValidator(min_length, message_lt_min),
     validators.MaxLengthValidator(max_length, message_ht_max)
