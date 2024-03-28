@@ -1,14 +1,13 @@
 """Community module for displaying arts"""
 from django import forms
 from django.core import validators
-from .models import *
+from .models import Community
 
 class EventCreation(forms.Form):
     """Class form for creating events"""
 
-    def __init__(self):
-        pass
-    
+    # pylint: disable=too-few-public-methods
+
     seats = forms.IntegerField()
 
     min_length = 2

@@ -3,10 +3,10 @@ from datetime import datetime
 from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.http import Http404
-from artsforum.models import *
-from community.models import *
-from .models import *
-from .forms import *
+from artsforum.models import Posts
+from community.models import Community
+from .models import BidPosts
+from .forms import BidCreation
 
 # Create your views here.
 

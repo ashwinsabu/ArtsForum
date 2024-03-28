@@ -2,14 +2,13 @@
 from django import forms
 from django.core import validators
 from django.utils import timezone
-from .models import *
+from .models import BidPosts
 
 
 class BidCreation(forms.Form):
     """Class for form to create a bid"""
 
-    def __init__(self):
-        pass
+    # pylint: disable=too-few-public-methods
     image = forms.ImageField()
     len_max = 20
     len_min = 2

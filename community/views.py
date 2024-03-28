@@ -3,8 +3,8 @@ import json
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse
-from .models import *
-from .forms import *
+from .models import Community,Participants
+from .forms import EventCreation
 # Create your views here.
 
 def community_page_view(request):

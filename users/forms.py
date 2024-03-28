@@ -7,8 +7,7 @@ from django.core import validators
 class UserSignUpForm(UserCreationForm):
     """Class for signup"""
 
-    def __init__(self):
-        pass
+    # pylint: disable=too-few-public-methods
     email = forms.EmailField()
 
     min_length = 2
