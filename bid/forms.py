@@ -42,14 +42,3 @@ class BidCreation(forms.Form):
         """Class for forms of Bids"""
         model = BidPosts
         fields = ['image', 'name','description','amount_initial', 'time_limit']
-
-
-# class BidUpdation(forms.Form):
-#     image = forms.CharField()
-#     name = forms.CharField()
-#     description = forms.CharField()
-#     amount_initial= forms.IntegerField()
-#     time_limit = forms.DateTimeField()
-#     class Meta:
-#         model = BidPosts
-#         fields = ['image', 'name','description','amount_initial', 'time_limit']

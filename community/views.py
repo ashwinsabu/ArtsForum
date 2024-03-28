@@ -51,32 +51,30 @@ def community_page_view(request):
 
 def book_page_view(request,id_u):
     """Function for booking the events for users"""
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            participants = request.POST.get('participants')
-            if participants:
-                participants = json.loads(participants)
-                print(len(participants))
-                community=Community.objects.get(id=id_u)
-                if community.seats>=len(participants) :
-                    for x in participants:
-                        Participants.objects.create(
-                            name=x['name'],
-                            email=x['email'],
-                            age=x['age'],
-                            number=x['number'],
-                            user_id=request.user,
-                            community_id= community
-                        )
+    if request.method == 'POST':
+        participants = request.POST.get('participants')
+        if participants:
+            participants = json.loads(participants)
+            print(len(participants))
+            community=Community.objects.get(id=id_u)
+            if community.seats>=len(participants) :
+                for x in participants:
+                    Participants.objects.create(
+                        name=x['name'],
+                        email=x['email'],
+                        age=x['age'],
+                        number=x['number'],
+                        user_id=request.user,
+                        community_id= community
+                    )
 
-                else:
-                    messages.warning(
-                        request, f'Only {community.seats} seats are remaining.')
+            else:
+                messages.warning(
+                    request, f'Only {community.seats} seats are remaining.')
 
-                return redirect(reverse('booking', args=[id_u]))
+            return redirect(reverse('booking', args=[id_u]))
 
-        return render(request, 'booking.html')
-    return redirect('login')
+    return render(request, 'booking.html')
 
 def create_page_view(request):
     """Function for creataing the events for volunteers/supervisors"""
@@ -109,12 +107,6 @@ def view_part(request,id_u):
         "data":data
     }
     return render(request, 'partdata.html',context)
-
-# def event_delete(request,id):
-#     """Function for deleting the events for volunteers/supervisors"""
-#     data=Community.objects.filter(id=id)
-#     data.delete()
-#     return redirect('mybid.html')
 
 def event_delete(request, id_u):
     """Function for deleting the events for volunteers/supervisors"""

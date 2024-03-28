@@ -27,6 +27,5 @@ def signin(request):
             if user is not None:
                 login(request, user)
                 return redirect('index')
-            msg= 'invalid credentials'
         msg = 'error validating form'
     return render(request, 'users/signin.html', {'form': form, 'msg': msg})
