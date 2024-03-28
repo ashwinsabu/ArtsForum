@@ -36,8 +36,7 @@ def bid_page_view(request):
             'posts': posts,
         }
         return render(request, 'bid_index.html',context)
-    else:
-        return redirect('login')
+    return redirect('login')
 
 
 
@@ -75,8 +74,7 @@ def create_page_view(request):
         elif request.method == "GET":
             form = BidCreation()
         return render(request, 'create.html', {'form': form})
-    else:
-        return redirect('login')
+    return redirect('login')
 
 def my_page_view(request):
     """Function for displaying the contents created by a respective user"""
@@ -94,8 +92,7 @@ def my_page_view(request):
             'community':community
         }
         return render(request, 'mybid.html',context)
-    else:
-        return redirect('login')
+    return redirect('login')
 
 def update_page_view(request, post_id):
     """Function for Updating the bids"""
@@ -125,8 +122,7 @@ def update_page_view(request, post_id):
             })
 
         return render(request, 'update.html', {'form': form})
-    else:
-        return redirect('login')
+    return redirect('login')
 
 
 # To delete a Bid from the section  -- here we pass the id as the argument
@@ -136,8 +132,7 @@ def delete_bid_post(request, post_id):
         data = BidPosts.objects.get(id=post_id)
         data.delete()
         return redirect('myposts')
-    else:
-        return redirect('login')
+    return redirect('login')
 
 # To delete a Post from the section  -- here we pass the id as the argument
 def delete_my_post(request, post_id):
@@ -146,5 +141,4 @@ def delete_my_post(request, post_id):
         data = Posts.objects.get(id=post_id)
         data.delete()
         return redirect('myposts')
-    else:
-        return redirect('login')
+    return redirect('login')

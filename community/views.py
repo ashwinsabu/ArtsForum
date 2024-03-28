@@ -46,8 +46,7 @@ def community_page_view(request):
             "participants":participants
         }
         return render(request, 'index_comm.html',context)
-    else:
-        return redirect('login')
+    return redirect('login')
 
 def book_page_view(request,id):
     """Function for booking the events for users"""
@@ -75,8 +74,7 @@ def book_page_view(request,id):
                 return redirect(reverse('booking', args=[id]))
 
         return render(request, 'booking.html')
-    else:
-        return redirect('login')
+    return redirect('login')
 
 def create_page_view(request):
     """Function for creataing the events for volunteers/supervisors"""
@@ -99,8 +97,7 @@ def create_page_view(request):
         elif request.method == "GET":
             form = EventCreation()
         return render(request, 'create_event.html', {'form': form})
-    else:
-        return redirect('login')
+    return redirect('login')
 
 def view_part(request,id):
     """Function for viewing the participants of the events for volunteers/supervisors"""
@@ -122,5 +119,4 @@ def event_delete(request, id):
         data = Community.objects.get(id=id)
         data.delete()
         return redirect('myposts')
-    else:
-        return redirect('login')
+    return redirect('login')

@@ -67,15 +67,12 @@ def post_page_view(request):
                     user_created=request.user
                 )
                 return redirect('index')
-            else:
-                print("error")
         # Display the form field in HTML page
         elif request.method == "GET":
             form = PostCreation()
         return render(request, 'users/create_post.html', {'form': form})
     # If not logged in navigate to Login Page
-    else:
-        return redirect('login')
+    return redirect('login')
 
 # View for about us page
 def about_page_view(request):
@@ -106,8 +103,7 @@ def customer_queries(request):
             'queries':queries,
         }
         return render(request, 'users/query.html',context)
-    else:
-        return redirect('login')
+    return redirect('login')
 
 #View for updating the posts
 def update_page_view(request, id):
@@ -136,8 +132,7 @@ def update_page_view(request, id):
             })
 
         return render(request, 'users/update_post.html', {'form': form})
-    else:
-        return redirect('login')
+    return redirect('login')
 
 def logout_user(request):
     """Function for logging out"""
