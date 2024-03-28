@@ -112,7 +112,6 @@ def update_page_view(request, id_u):
     #Checks if user logged in
     if request.user.is_authenticated:
         post = Posts.objects.get(id=id_u) # Retrive the posts with id passed through the url
-        
         # Checks if the update is performed
         if request.method == 'POST':
             form = PostCreation(request.POST,request.FILES)
