@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name='bid_posts',
+            model_name='BidPosts',
             name='image',
             field=models.ImageField(upload_to='uploads/bid/'),
         ),

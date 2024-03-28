@@ -1,11 +1,11 @@
 """Bids module for displaying arts"""
+from datetime import datetime
 from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.http import Http404
-from datetime import datetime
-from .models import *
 from artsforum.models import *
 from community.models import *
+from .models import *
 from .forms import *
 
 # Create your views here.
@@ -15,7 +15,7 @@ def bid_page_view(request):
     """Function for displaying the bids for users"""
     #Checks if user logged in
     if request.user.is_authenticated:
-        posts = bid_posts.objects.filter(time_limit__gt=datetime.now())
+        posts = BidPosts.objects.filter(time_limit__gt=datetime.now())
         #Checks if any submit operation performed
         if request.method == 'POST':
             if 'bid' in request.POST:
@@ -23,13 +23,13 @@ def bid_page_view(request):
                 amount_final = request.POST.get('amount_final')
                 user_id = request.POST.get('user_id')
                 if post_id and amount_final:
-                    posts = bid_posts.objects.get(id=post_id)
+                    posts = BidPosts.objects.get(id=post_id)
                     posts.amount_final=amount_final
                     posts.user_assigned_id=user_id
                     posts.save()
             elif 'delete_admin' in request.POST: #Delete Bid
                 postid=request.POST.get('post_id')
-                data=bid_posts.objects.get(id=postid)
+                data=BidPosts.objects.get(id=postid)
                 data.delete()
             return redirect('bid_index')
         context = {
@@ -59,7 +59,7 @@ def create_page_view(request):
                 amount_final = request.POST.get('amount_final')
                 user_assigned = User.objects.get(id=user_id)
                 user_created = User.objects.get(id=user_id)
-                bid_post = bid_posts.objects.create(
+                bid_post = BidPosts.objects.create(
                     image=image,
                     name=name,
                     description=description,
@@ -82,7 +82,7 @@ def my_page_view(request):
     """Function for displaying the contents created by a respective user"""
     if request.user.is_authenticated:
         currentuser = request.user
-        posts = bid_posts.objects.filter(user_created=currentuser)
+        posts = BidPosts.objects.filter(user_created=currentuser)
         myposts = Posts.objects.filter(user_created=currentuser)
         community={}
         if request.user.is_staff:
@@ -101,8 +101,8 @@ def update_page_view(request, post_id):
     """Function for Updating the bids"""
     if request.user.is_authenticated:
         try:
-            post = bid_posts.objects.get(id=post_id)
-        except bid_posts.DoesNotExist:
+            post = BidPosts.objects.get(id=post_id)
+        except BidPosts.DoesNotExist:
             raise Http404("Post does not exist")
 
         if request.method == 'POST':
@@ -133,7 +133,7 @@ def update_page_view(request, post_id):
 def delete_bid_post(request, post_id):
     """Function for deleting the bids for users"""
     if request.user.is_authenticated:
-        data = bid_posts.objects.get(id=post_id)
+        data = BidPosts.objects.get(id=post_id)
         data.delete()
         return redirect('myposts')
     else:

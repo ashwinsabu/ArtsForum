@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('artsforum', '0002_bid_posts'),
+        ('artsforum', '0002_BidPosts'),
     ]
 
     operations = [

@@ -40,7 +40,7 @@ class BidCreation(forms.Form):
 
     class Meta:
         """Class for forms of Bids"""
-        model = bid_posts
+        model = BidPosts
         fields = ['image', 'name','description','amount_initial', 'time_limit']
 
 
@@ -51,5 +51,5 @@ class BidCreation(forms.Form):
 #     amount_initial= forms.IntegerField()
 #     time_limit = forms.DateTimeField()
 #     class Meta:
-#         model = bid_posts
+#         model = BidPosts
 #         fields = ['image', 'name','description','amount_initial', 'time_limit']

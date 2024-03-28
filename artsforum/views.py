@@ -2,9 +2,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import Http404
+from django.contrib.auth import logout
 from .forms import *
 from .models import *
-from django.contrib.auth import logout
 
 #Views to display index page
 def index_page_view(request):
