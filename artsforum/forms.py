@@ -1,12 +1,18 @@
 """Artsforum module for displaying arts -- forms to manage user input"""
+from typing import Mapping
 from django import forms
 from django.core import validators
+from django.forms.renderers import BaseRenderer
+from django.forms.utils import ErrorList
 from .models import *
 
 
 #Form to create a post
 class PostCreation(forms.Form):
     """Function for creating a post"""
+
+    def __init__(self):
+        pass
     image = forms.ImageField()
 
     min_length = 2

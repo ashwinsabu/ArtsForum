@@ -6,6 +6,9 @@ from django.core import validators
 
 class UserSignUpForm(UserCreationForm):
     """Class for signup"""
+
+    def __init__(self):
+        pass
     email = forms.EmailField()
 
     min_length = 2

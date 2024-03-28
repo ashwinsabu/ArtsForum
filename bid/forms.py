@@ -7,6 +7,9 @@ from .models import *
 
 class BidCreation(forms.Form):
     """Class for form to create a bid"""
+
+    def __init__(self):
+        pass
     image = forms.ImageField()
     len_max = 20
     len_min = 2

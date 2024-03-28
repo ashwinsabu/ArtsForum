@@ -5,6 +5,10 @@ from .models import *
 
 class EventCreation(forms.Form):
     """Class form for creating events"""
+
+    def __init__(self):
+        pass
+    
     seats = forms.IntegerField()
 
     min_length = 2
