@@ -2,7 +2,6 @@
 from datetime import datetime
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
-from django.http import Http404
 from artsforum.models import Posts
 from community.models import Community
 from .models import BidPosts

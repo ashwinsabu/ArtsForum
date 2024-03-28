@@ -60,7 +60,7 @@ def book_page_view(request,id_u):
                 community=Community.objects.get(id=id_u)
                 if community.seats>=len(participants) :
                     for x in participants:
-                        participant = Participants.objects.create(
+                        Participants.objects.create(
                             name=x['name'],
                             email=x['email'],
                             age=x['age'],
@@ -68,8 +68,7 @@ def book_page_view(request,id_u):
                             user_id=request.user,
                             community_id= community
                         )
-                        if participant:
-                            print("success")
+
                 else:
                     messages.warning(
                         request, f'Only {community.seats} seats are remaining.')
