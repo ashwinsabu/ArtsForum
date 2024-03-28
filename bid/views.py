@@ -44,7 +44,7 @@ def CreatePageView(request):
     #Checks if user logged in
     if request.user.is_authenticated:
         if request.method == "POST":
-            form = BidCreation(request.POST) #Calls the form for creation of Bid
+            form = BidCreation(request.POST,request.FILES) #Calls the form for creation of Bid
             if form.is_valid():
                 image = form.cleaned_data['image']
                 name = form.cleaned_data['name']

@@ -52,7 +52,8 @@ def PostPageView(request):
     if request.user.is_authenticated:
     #Checks if any submit operation performed
         if request.method == "POST":
-            form = PostCreation(request.POST)
+            form = PostCreation(request.POST,request.FILES)
+            print(form)
             if form.is_valid():
                 image = form.cleaned_data['image']
                 name = form.cleaned_data['name']
@@ -65,6 +66,8 @@ def PostPageView(request):
                     user_created=request.user
                 )
                 return redirect('index')
+            else:
+                print("error")
         # Display the form field in HTML page
         elif request.method == "GET":
             form = PostCreation()
@@ -111,7 +114,7 @@ def UpdatePageView(request, id):
 
         # Checks if the update is performed
         if request.method == 'POST':
-            form = PostCreation(request.POST)
+            form = PostCreation(request.POST,request.FILES)
             if form.is_valid():
                 post.name = form.cleaned_data['name']
                 post.description = form.cleaned_data['description']

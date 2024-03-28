@@ -4,7 +4,7 @@ from django.core import validators
 from django.utils import timezone
 
 class BidCreation(forms.Form):
-    image = forms.CharField()
+    image = forms.ImageField()
 
     min_length = 2
     max_length = 20

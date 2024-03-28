@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'artsforum',
     'users',
     'bid',
-    'community'
+    'community',
+    'storages',
     # 'quiz',
 ]
 
@@ -136,3 +137,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGOUT_REDIRECT_URL = "/"  
+
+#s3 storage configurations
+AWS_STORAGE_BUCKET_NAME = 'x23196505-devops-pr'
+AWS_S3_REGION_NAME = 'eu-west-1'
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
