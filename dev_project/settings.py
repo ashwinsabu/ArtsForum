@@ -29,7 +29,7 @@ SECRET_KEY = data['django']
 SECRET_KEY = data['django']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
