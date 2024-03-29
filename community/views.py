@@ -55,7 +55,6 @@ def book_page_view(request,id_u):
         participants = request.POST.get('participants')
         if participants:
             participants = json.loads(participants)
-            print(len(participants))
             community=Community.objects.get(id=id_u)
             if community.seats>=len(participants) :
                 for x in participants:
