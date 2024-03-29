@@ -19,7 +19,6 @@ def index_page_view(request):
         return redirect('index')
     #Get all the Post in the Table
     posts = Posts.objects.all()
-    print(request.user)
     context = {
     'posts': posts,
   }
@@ -54,7 +53,6 @@ def post_page_view(request):
     #Checks if any submit operation performed
         if request.method == "POST":
             form = PostCreation(request.POST,request.FILES)
-            print(form)
             if form.is_valid():
                 image = form.cleaned_data['image']
                 name = form.cleaned_data['name']

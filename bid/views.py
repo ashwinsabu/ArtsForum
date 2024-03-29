@@ -85,7 +85,6 @@ def my_page_view(request):
         community={}
         if request.user.is_staff:
             community=Community.objects.filter(user_id=currentuser)
-            print(community)
         context = {
             'posts': posts,
             'myposts':myposts,

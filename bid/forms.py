@@ -4,6 +4,10 @@ from django.core import validators
 from django.utils import timezone
 from .models import BidPosts
 
+def checktime(value):
+    """Function for checking if the time is past"""
+    if value<timezone.now():
+        raise forms.ValidationError("Select a future time")
 
 class BidCreation(forms.Form):
     """Class for form to create a bid"""
@@ -27,12 +31,6 @@ class BidCreation(forms.Form):
     ])
 
     amount_initial= forms.IntegerField()
-    def checktime(value):
-        """Function for checking if the time is past"""
-        if value<timezone.now():
-            raise forms.ValidationError("Select a future time")
-        # elif value
-
     time_limit = forms.DateTimeField(
         widget=forms.DateTimeInput(
             attrs={'type': 'datetime-local'}),

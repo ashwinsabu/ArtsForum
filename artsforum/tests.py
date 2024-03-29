@@ -20,7 +20,7 @@ class TestModels(TestCase):
 		)
         self.assertEqual(str(post_item), 'Test Post')
         self.assertTrue(isinstance(post_item, Posts))
-    
+
     def test_model_contacts(self):
         """Function for creating model for contact us queries"""
         post_contact = UserRequest.objects.create(
