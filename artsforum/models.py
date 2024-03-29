@@ -24,5 +24,5 @@ class UserRequest(models.Model):
     status = models.IntegerField()
     comments = models.CharField(max_length=200,null=True)
 
-    def __int__(self):
+    def __str__(self):
         return str(self.name)
