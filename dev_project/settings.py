@@ -27,9 +27,9 @@ load_dotenv(find_dotenv())
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['x23196505ashdevapp-env.eba-fuaeduwk.eu-west-1.elasticbeanstalk.com']
 
-# CSRF_TRUSTED_ORIGINS = ['https://x23196505DevopsProjectEnv.eba-mncdgksn.eu-west-1.elasticbeanstalk.com']
+CSRF_TRUSTED_ORIGINS = ['http://x23196505ashdevapp-env.eba-fuaeduwk.eu-west-1.elasticbeanstalk.com','https://x23196505ashdevapp-env.eba-fuaeduwk.eu-west-1.elasticbeanstalk.com']
 
 # Application definition
 
