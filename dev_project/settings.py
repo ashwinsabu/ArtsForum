@@ -23,7 +23,6 @@ key = boto3.client('secretsmanager', region_name='eu-west-1')
 response = key.get_secret_value(SecretId='x23196505/ash/devops')
 value = response['SecretString']
 data = json.loads(value)
-SECRET_KEY = data['django']
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = data['django']
@@ -31,7 +30,7 @@ SECRET_KEY = data['django']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['x23196505-devops-fpr.eba-ngmgifzx.eu-west-1.elasticbeanstalk.com']
 
 CSRF_TRUSTED_ORIGINS = ['https://*.amazonaws.com','https://*.127.0.0.1']
 
