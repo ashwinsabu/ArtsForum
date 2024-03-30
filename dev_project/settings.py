@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'bid',
     'community',
     'storages',
-    # 'quiz',
 ]
 
 MIDDLEWARE = [
