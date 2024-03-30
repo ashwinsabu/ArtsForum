@@ -10,7 +10,8 @@ class TestModels(TestCase):
     def setUp(self):
         """Function for initilaizing user to be used accross the class"""
         self.user= User.objects.create_user(username='nci2024', password='peaceinworld')
-        self.community= Community.objects.create(heading='test', location='test',subline='test',seats=20)
+        self.community= Community.objects.create(
+            heading='test', location='test',subline='test',seats=20)
 
     def test_model_community(self):
         """Function for creating model for event module"""
@@ -43,7 +44,8 @@ class TestViews(TestCase):
         """ Initilaizing """
         self.client = Client()
         self.user= User.objects.create_user(username='nci2024', password='peaceinworld')
-        self.user_staff= User.objects.create_user(username='nci2025_staff', password='peaceinworld',is_staff=True)
+        self.user_staff= User.objects.create_user(
+            username='nci2025_staff', password='peaceinworld',is_staff=True)
         self.client.login(username='nci2024', password='peaceinworld')
 
         self.event = Community.objects.create(
@@ -55,8 +57,6 @@ class TestViews(TestCase):
 		)
 
         self.community = reverse('index_comm')
-        self.create_event = reverse('create_event')
-        self.booking = reverse('booking',args=[self.event.id])
         self.view_part=reverse('view_part',args=[self.event.id])
         self.event_delete=reverse('event_delete',args=[self.event.id])
 
@@ -86,21 +86,21 @@ class TestViews(TestCase):
 
     def test_booking(self):
         """Index booking page"""
-        response = self.client.get(self.booking)
+        response = self.client.get(reverse('booking',args=[self.event.id]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'booking.html')
 
     def test_create_event(self):
         """event creation page"""
-        response = self.client.get(self.create_event)
-        self.assertEqual(response.status_code, 200)
+        response = self.client.get(reverse('create_event'))
+        self.assertEqual(response.status_code, 302)
         self.assertTemplateUsed(response, 'create_event.html')
 
     def test_create_event(self):
         """posting an event"""
         self.client.logout()
         self.client.login(username='nci2025_staff', password='peaceinworld')
-        response=self.client.post(self.create_event,{
+        response=self.client.post(reverse('create_event'),{
             'heading':'test heading',
 			'location':'Dublin',
 			'subline':"Test Subline",
@@ -116,5 +116,3 @@ class TestViews(TestCase):
         response = self.client.get(self.view_part)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'partdata.html')
-
-

@@ -40,7 +40,10 @@ class TestViews(TestCase):
     def setUp(self):
         """ Initilaizing """
         self.client = Client()
-        self.user= User.objects.create_user(username='nci2024', password='peaceinworld',is_staff=True)
+        self.user= User.objects.create_user(
+            username='nci2024',
+            password='peaceinworld',
+            is_staff=True)
         self.client.login(username='nci2024', password='peaceinworld')
 
         self.post_new = Posts.objects.create(
@@ -49,8 +52,6 @@ class TestViews(TestCase):
 			description="Test Description",
 			user_created=self.user
 		)
-
-
         self.request_new= UserRequest.objects.create(
 			name='Test Contact',
             email='ashwin@a.com',
@@ -61,28 +62,25 @@ class TestViews(TestCase):
 		)
 
         #urls section
-        self.about = reverse('about')
-        self.index = reverse('index')
         self.contact = reverse('contact')
         self.post = reverse('post')
         self.query=reverse('query')
-        self.logout=reverse('logout')
 
     def test_about(self):
         """About us page"""
-        response = self.client.get(self.about)
+        response = self.client.get(reverse('about'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'users/about.html')
 
     def test_index(self):
         """Index page"""
-        response = self.client.get(self.index)
+        response = self.client.get(reverse('index'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'users/index.html')
-    
+
     def test_delete_post(self):
         """test for deleting the post"""
-        response = self.client.post(self.index, {
+        response = self.client.post(reverse('index'), {
 			'delete_admin': True,
 			'post_id': self.post_new.id
 		})
@@ -145,5 +143,5 @@ class TestViews(TestCase):
 
     def logout(self):
         """logout"""
-        response = self.client.get(self.logout)
+        response = self.client.get(reverse('logout'))
         self.assertEqual(response.status_code, 302)

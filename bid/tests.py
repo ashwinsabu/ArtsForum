@@ -1,7 +1,7 @@
 """Bids module for displaying arts"""
+from datetime import datetime
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
-from datetime import datetime
 from django.urls import reverse
 from .models import BidPosts
 
@@ -34,8 +34,10 @@ class TestViews(TestCase):
     def setUp(self):
         """ Initilaizing """
         self.client = Client()
-        self.user_1= User.objects.create_user(username='nci2024', password='peaceinworld',is_staff=True)
-        self.user_2= User.objects.create_user(username='nci_2025', password='peaceinworld',is_staff=False)
+        self.user_1= User.objects.create_user(
+            username='nci2024', password='peaceinworld',is_staff=True)
+        self.user_2= User.objects.create_user(
+            username='nci_2025', password='peaceinworld',is_staff=False)
         self.client.login(username='nci2024', password='peaceinworld')
 
         self.bidpost=BidPosts.objects.create(
@@ -85,12 +87,9 @@ class TestViews(TestCase):
         response = self.client.get(self.create_bid)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'create.html')
-    
+
     def test_my_posts(self):
         """Create Bid page"""
         response = self.client.get(self.myposts)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'mybid.html')
-
-
-
