@@ -1,12 +1,12 @@
 branch-defaults:
   main:
-    environment: x23196505-devops-fpr
+    environment: x23196505-devops-fpr-final
     group_suffix: null
 global:
-  application_name: x23196505-devops-fpr
+  application_name: x23196505-devops-fpr-final
   branch: null
   default_ec2_keyname: null
-  default_platform: Python 3.11
+  default_platform: Python 3.9
   default_region: eu-west-1
   include_git_submodules: true
   instance_profile: null
