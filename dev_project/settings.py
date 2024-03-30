@@ -30,10 +30,9 @@ SECRET_KEY = data['django']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['x23196505ashDevops.eba-qngdksz8.eu-west-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://x23196505ashDevops.eba-qngdksz8.eu-west-1.elasticbeanstalk.com']
-
+CSRF_TRUSTED_ORIGINS = ['https://*']
 
 # Application definition
 
