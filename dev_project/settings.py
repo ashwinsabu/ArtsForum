@@ -32,7 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['x23196505ashDevops30.eba-8zqfqwpg.eu-west-1.elasticbeanstalk.com']
 
-CSRF_TRUSTED_ORIGINS = ['https://*.amazonaws.com','https://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://x23196505ashDevops30.eba-8zqfqwpg.eu-west-1.elasticbeanstalk.com']
 
 
 # Application definition
