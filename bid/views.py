@@ -38,7 +38,6 @@ def bid_page_view(request):
     return redirect('login')
 
 
-
 #Create a Bid by a user
 def create_page_view(request):
     """Function for creating Bid"""

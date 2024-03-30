@@ -11,12 +11,13 @@ def index_page_view(request):
     #Checks if any submit operation performed
     if request.method == 'POST':
         #previleage for is_staff true users (supervisors) to delete posts displayed
-        if 'delete_admin' in request.POST:
-            postid=request.POST.get('post_id')
-            data=Posts.objects.get(id=postid)
-            data.delete()
-
-        return redirect('index')
+        if request.user.is_authenticated and request.user.is_staff:
+            if 'delete_admin' in request.POST:
+                postid=request.POST.get('post_id')
+                data=Posts.objects.get(id=postid)
+                data.delete()
+            return redirect('index')
+        return redirect('login')
     #Get all the Post in the Table
     posts = Posts.objects.all()
     context = {

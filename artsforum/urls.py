@@ -8,6 +8,6 @@ urlpatterns = [
     path('about/', views.about_page_view, name='about'),
     path('post/', views.post_page_view, name='post'),
     path('query/', views.customer_queries,name='query'),
-    path('update/<int:id>',views.update_page_view, name='query'),
+    path('update/<int:id>',views.update_page_view, name='update'),
     path('logout', views.logout_user, name='logout'),
 ]
