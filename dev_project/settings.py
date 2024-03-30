@@ -29,7 +29,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://7f7317ff0b9c4483b85d5b4330a99245.vfs.cloud9.eu-west-1.amazonaws.com']
+# CSRF_TRUSTED_ORIGINS = ['https://x23196505DevopsProjectEnv.eba-mncdgksn.eu-west-1.elasticbeanstalk.com']
 
 # Application definition
 
