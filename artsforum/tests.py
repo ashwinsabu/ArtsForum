@@ -135,11 +135,11 @@ class TestViews(TestCase):
         """test for deleting the post"""
         response = self.client.post(self.query, {
 			'change': True,
-            'comments':"Test comments 2024",
+            'comments':"Test 2024",
 			'id': self.request_new.id
 		})
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(UserRequest.objects.get(id=self.request_new.id).comments,'Test comments 2024')
+        self.assertEqual(UserRequest.objects.get(id=self.request_new.id).comments,'Test 2024')
 
     def logout(self):
         """logout"""

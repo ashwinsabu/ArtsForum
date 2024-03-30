@@ -91,12 +91,6 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, 'booking.html')
 
     def test_create_event(self):
-        """event creation page"""
-        response = self.client.get(reverse('create_event'))
-        self.assertEqual(response.status_code, 302)
-        self.assertTemplateUsed(response, 'create_event.html')
-
-    def test_create_event(self):
         """posting an event"""
         self.client.logout()
         self.client.login(username='nci2025_staff', password='peaceinworld')
