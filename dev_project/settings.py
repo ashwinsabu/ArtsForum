@@ -9,9 +9,8 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-import json
+import os
 from pathlib import Path
-import boto3
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,18 +18,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-key = boto3.client('secretsmanager', region_name='eu-west-1')
-response = key.get_secret_value(SecretId='x23196505/ash/devops')
-value = response['SecretString']
-data = json.loads(value)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = data['django']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['x23196505DevopsProjectEnv.eba-mncdgksn.eu-west-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = os.environ.get('SECRET_KEY')
 
 # CSRF_TRUSTED_ORIGINS = ['https://x23196505DevopsProjectEnv.eba-mncdgksn.eu-west-1.elasticbeanstalk.com']
 

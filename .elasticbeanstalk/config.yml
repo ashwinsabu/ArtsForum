@@ -1,13 +1,13 @@
 branch-defaults:
   main:
-    environment: x23196505DevopsProjectEnv
+    environment: x23196505DevopsProjectEnv02
     group_suffix: null
 global:
-  application_name: x23196505DevopsProject
+  application_name: x23196505DevopsProject-002
   branch: null
   default_ec2_keyname: null
   default_platform: Python 3.11
-  default_region: eu-west-1
+  default_region: us-east-1
   include_git_submodules: true
   instance_profile: null
   platform_name: null
