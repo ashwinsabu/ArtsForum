@@ -2,12 +2,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import logout
-from django.views.decorators.http import require_http_methods
 from .forms import PostCreation
 from .models import Posts,UserRequest
 
 #Views to display index page
-@require_http_methods(["GET", "POST"])
 def index_page_view(request):
     """Function for displaying index page"""
     #Checks if any submit operation performed
@@ -29,7 +27,6 @@ def index_page_view(request):
 
 
 # View for contact us page
-@require_http_methods(["GET", "POST"])
 def contact_page_view(request):
     """Function for displaying contact page and takin the input"""
     #Checks if any submit operation performed
@@ -50,7 +47,6 @@ def contact_page_view(request):
     return render(request, 'users/contact.html')
 
 # View for creating a post
-@require_http_methods(["GET", "POST"])
 def post_page_view(request):
     """Function for displaying the post creation page"""
     #Checks if user logged in
@@ -79,13 +75,11 @@ def post_page_view(request):
     return redirect('login')
 
 # View for about us page
-@require_http_methods(["GET"])
 def about_page_view(request):
     """Function for displaying about us page"""
     return render(request, 'users/about.html')
 
 # View for responding to messages from contact us page
-@require_http_methods(["GET", "POST"])
 def customer_queries(request):
     """Function for displaying customer queries from contact us page"""
     #checks if user is logged in and is_staff is true (Checks if the user is supervisor)
@@ -112,7 +106,6 @@ def customer_queries(request):
     return redirect('login')
 
 #View for updating the posts
-@require_http_methods(["GET", "POST"])
 def update_page_view(request, id_u):
     """Function for updaating the posts"""
     #Checks if user logged in
