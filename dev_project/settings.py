@@ -27,12 +27,12 @@ DEBUG = True
 SECRET_KEY = os.environ['SECRET_KEY']
 
 ALLOWED_HOSTS = [
-    'x23196505ashdevapp-env.eba-fuaeduwk.eu-west-1.elasticbeanstalk.com',
+    'x23196505ashdevapp-final01.eba-fuaeduwk.eu-west-1.elasticbeanstalk.com',
     '7f7317ff0b9c4483b85d5b4330a99245.vfs.cloud9.eu-west-1.amazonaws.com']
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://x23196505ashdevapp-env.eba-fuaeduwk.eu-west-1.elasticbeanstalk.com',
-    'https://x23196505ashdevapp-env.eba-fuaeduwk.eu-west-1.elasticbeanstalk.com',
+    'http://x23196505ashdevapp-final01.eba-fuaeduwk.eu-west-1.elasticbeanstalk.com',
+    'https://x23196505ashdevapp-final01.eba-fuaeduwk.eu-west-1.elasticbeanstalk.com',
     'https://7f7317ff0b9c4483b85d5b4330a99245.vfs.cloud9.eu-west-1.amazonaws.com']
 
 # Application definition
