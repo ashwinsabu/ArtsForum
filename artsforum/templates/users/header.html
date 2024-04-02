@@ -38,11 +38,12 @@
             <a class="nav-link" href="{% url 'query' %}">Customer Queries</a>
           </li>
           {% endif %}
+          {% if request.user %}
           <div style="position: absolute; right: 10px; top: 5px;">
             <a type="button" class="btn btn-info" href="{% url 'post' %}">Post</a>
             <a type="button" class="btn btn-info" href="{% url 'myposts' %}">My Content</a>
             <a type="button" class="btn btn-info" href="{% url 'logout' %}">Log Out</a>
-            
+            {% endif %}
           </div>
         </ul>
       </div>
