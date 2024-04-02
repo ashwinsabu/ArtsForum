@@ -1,6 +1,6 @@
 branch-defaults:
   main:
-    environment: x23196505DevopsProjectEnv02
+    environment: x23196505ashdevapp-final01
     group_suffix: null
 global:
   application_name: x23196505DevopsProject-002
