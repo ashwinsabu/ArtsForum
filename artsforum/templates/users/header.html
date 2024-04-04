@@ -38,11 +38,14 @@
             <a class="nav-link" href="{% url 'query' %}">Customer Queries</a>
           </li>
           {% endif %}
-          {% if request.user %}
+          {% if request.user.is_authenticated %}
           <div style="position: absolute; right: 10px; top: 5px;">
             <a type="button" class="btn btn-info" href="{% url 'post' %}">Post</a>
-            <a type="button" class="btn btn-info" href="{% url 'myposts' %}">My Content</a>
-            <a type="button" class="btn btn-info" href="{% url 'logout' %}">Log Out</a>
+            <a type="button" class="btn btn-secondary" href="{% url 'myposts' %}">My Content</a>
+            <a type="button" class="btn btn-danger" href="{% url 'logout' %}">Log Out</a>
+          {% else %}
+          <div style="position: absolute; right: 10px; top: 5px;">
+            <a type="button" class="btn btn-success" href="{% url 'login' %}">Log In</a>
             {% endif %}
           </div>
         </ul>
